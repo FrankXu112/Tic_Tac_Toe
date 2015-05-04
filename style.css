@@ -5,3 +5,8 @@ td{
   font-size: 5em;
   text-align: center;
 }
+
+table{
+	border-spacing: 0px;
+	border: 2px solid black;
+}
