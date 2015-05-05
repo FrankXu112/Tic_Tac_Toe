@@ -32,6 +32,7 @@
 		<script>
 
     $(document).ready(function(){
+      var game_done = false;
 
   		var count = 0;
   		$("td").on('click', function(){
@@ -59,24 +60,33 @@
 
       function checkWinningComboForLetter(win, letter) {
         if ($("#" + win[0]).text() === letter &&
-        $("#" + win[1]).text() === letter &&
-        $("#" + win[2]).text() === letter)
+            $("#" + win[1]).text() === letter &&
+            $("#" + win[2]).text() === letter)
         {
           return true;
         }
       }
 
+
       function checkboard(){
         for(var i=0; i<winningCombos.length; i++) {
           win = winningCombos[i]
           if(checkWinningComboForLetter(win, 'X') === true){
-            alert("Player 'X' wins!"),
+            alert("Player 'X' wins!")
             shutdown();
           } else if(checkWinningComboForLetter(win, 'O') === true){
-            alert("Player 'O' wins!"),
+            alert("Player 'O' wins!")
             shutdown();
-          } else if(count === 9){
-            alert("Tie!"),
+          } else if(count === 9) {
+
+            if (game_done === true) {
+              console.log("reloading")
+              shutdown();
+            } else {
+              alert("Tie!")
+            }
+
+            game_done = true;
             shutdown();
           }
         }
@@ -86,6 +96,7 @@
         $('td').each(function(){
           $(this).off('click')
         })
+        window.location.reload()
       }
     });
 
